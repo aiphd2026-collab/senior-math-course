@@ -684,9 +684,15 @@ document.querySelectorAll('[data-toggle]').forEach(b=>{
 document.querySelectorAll('.nav').forEach(a=>a.addEventListener('click',e=>{
  e.preventDefault();
  const id=a.getAttribute('href').slice(1), s=document.getElementById(id);
- if(s.classList.contains('collapsed')) s.classList.remove('collapsed');
- a.classList.add('active');
- requestAnimationFrame(()=>s.scrollIntoView({behavior:'smooth',block:'start'}));
+ const isCollapsed=s.classList.contains('collapsed');
+ if(isCollapsed){
+   s.classList.remove('collapsed');
+   a.classList.add('active');
+   requestAnimationFrame(()=>s.scrollIntoView({behavior:'smooth',block:'start'}));
+ }else{
+   s.classList.add('collapsed');
+   a.classList.remove('active');
+ }
 }));
 document.querySelectorAll('.quiz-card').forEach(card=>{
  const ans=card.dataset.answer, fb=card.querySelector('.feedback'), exp=fb.dataset.exp;
